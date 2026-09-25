@@ -37,7 +37,7 @@ print('\nReference inverse')
 
 ref_inv = drop.reference_inverse(V=V, var_ref=var_ref, verbose=2)
 
-Wo_fit = reference_inverse["fit"][0]
+Wo_fit = ref_inv["fit"][0]
 
 error_Wo = (Wo_fit - Wo) * 100 / Wo
 
@@ -47,9 +47,9 @@ error_Wo = (Wo_fit - Wo) * 100 / Wo
 
 print('\nElastic forward')
 
-elastic_forward = drop.elastic_forward(Wo=Wo, par_ref=par_ref, var_ref=var_ref, mod_def=(K, G), A_frac=A_frac, verbose=2)
+ela_for = drop.elastic_forward(Wo=Wo, par_ref=par_ref, var_ref=var_ref, mod_def=(K, G), A_frac=A_frac, verbose=2)
 
-var_def = elastic_forward["var_def"]
+var_def = ela_for["var_def"]
 
 r_def = var_def[1]
 z_def = var_def[2]
@@ -60,9 +60,9 @@ z_def = var_def[2]
 
 print('\nElastic inverse - Stretch based')
 
-elastic_inverse_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
+ela_inv_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
 
-K_stretch = elastic_inverse_stretch["fit"][0]
+K_stretch = ela_inv_stretch["fit"][0]
 
 error_K_stretch = (K_stretch - K) * 100 / K
 
@@ -72,9 +72,9 @@ error_K_stretch = (K_stretch - K) * 100 / K
 
 print('\nElastic inverse - Area based')
 
-elastic_inverse_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
+ela_inv_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
 
-K_area = elastic_inverse_area["fit"][0]
+K_area = ela_inv_area["fit"][0]
 
 error_K_area = (K_area - K) * 100 / K
 
