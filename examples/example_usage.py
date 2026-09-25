@@ -58,7 +58,7 @@ z_def = var_def[2]
 # NOISE ADDITION
 # ============================================================
 
-var_def_noise = noise.gaussian(var_def=var_def, n_pixels=5, seed=0)
+var_def_noise = noise.gaussian(var_def=var_def, n_pixels=10, seed=0)
 
 r_def_noise = var_def_noise[1]
 z_def_noise = var_def_noise[2]
