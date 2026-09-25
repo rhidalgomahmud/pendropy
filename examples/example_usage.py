@@ -128,14 +128,9 @@ plt.figure(figsize=(6, 6))
 plt.plot(r_ref, z_ref, "C0--", label="Reference")
 plt.plot(-r_ref, z_ref, "C0--")
 
-# Elastic profile
-plt.plot(r_def, z_def, "C1", label="Elastic")
-plt.plot(-r_def, z_def, "C1")
-
 # Noisy profile
-
-plt.plot(r_def, z_def, ".k", ms=1, label="Noisy")
-plt.plot(-r_def, z_def, ".k", ms=1)
+plt.plot(r_def, z_def, ".-C1", ms=1, label="Elastic noisy")
+plt.plot(-r_def, z_def, ".-C1", ms=1)
 
 plt.xlabel(r"$\bar{r}^{*}$")
 plt.ylabel(r"$\bar{z}^{*} - \max(\bar{z}^{*})$")
