@@ -160,7 +160,7 @@ def reference_inverse(V, var_ref, inv_tol=1e-8, verbose=0):
         
         try:
 
-            result_try = simple_forward(Wo=Wo, V=V, N_mesh=N_mesh)
+            result_try = reference_forward(Wo=Wo, V=V, N_mesh=N_mesh)
             var_try = result_try["var_ref"]
             _, r_try, z_try, _ = var_try
 
@@ -410,9 +410,9 @@ def elastic_forward(Wo, par_ref, var_ref, mod_def, A_def, for_tol=1e-5, N_it=3, 
 
 def elastic_inverse_stretch(Wo, V, var_def, for_tol=1e-5, inv_tol=1e-8, verbose=0):
 
-    simple_drop = simple_forward(Wo=Wo, V=V)
-    l_ref, P0_ref = simple_drop['par_ref']
-    psi_ref, r_ref, z_ref, v_ref = simple_drop['var_ref']
+    reference_drop = reference_forward(Wo=Wo, V=V)
+    l_ref, P0_ref = reference_drop['par_ref']
+    psi_ref, r_ref, z_ref, v_ref = reference_drop['var_ref']
     V_ref = np.copy(V)
 
     _, r_def, z_def = var_def
@@ -557,9 +557,9 @@ def elastic_inverse_stretch(Wo, V, var_def, for_tol=1e-5, inv_tol=1e-8, verbose=
 def elastic_inverse_area(Wo, V, var_def, for_tol=1e-5, inv_tol=1e-8, verbose=0):
 
     # Reference drop
-    simple_drop = simple_forward(Wo=Wo, V=V)
-    l_ref, P0_ref = simple_drop['par_ref']
-    psi_ref, r_ref, z_ref, v_ref = simple_drop['var_ref']
+    reference_drop = reference_forward(Wo=Wo, V=V)
+    l_ref, P0_ref = reference_drop['par_ref']
+    psi_ref, r_ref, z_ref, v_ref = reference_drop['var_ref']
 
     _, r_def, z_def = var_def
 
@@ -611,10 +611,10 @@ def elastic_inverse_area(Wo, V, var_def, for_tol=1e-5, inv_tol=1e-8, verbose=0):
 
         try:
 
-            forward_result = complex_forward(
+            forward_result = elastic_forward(
                 Wo=Wo,
-                par_ref=simple_drop['par_ref'],
-                var_ref=simple_drop['var_ref'],
+                par_ref=reference_drop['par_ref'],
+                var_ref=reference_drop['var_ref'],
                 mod_def=np.array([K, G]),
                 A_def=A_def,
                 for_tol=for_tol,
@@ -694,10 +694,10 @@ def elastic_inverse_area(Wo, V, var_def, for_tol=1e-5, inv_tol=1e-8, verbose=0):
     # Compute lambda0 from the best forward solution
     try:
 
-        forward_best = complex_forward(
+        forward_best = elastic_forward(
             Wo=Wo,
-            par_ref=simple_drop['par_ref'],
-            var_ref=simple_drop['var_ref'],
+            par_ref=reference_drop['par_ref'],
+            var_ref=reference_drop['var_ref'],
             mod_def=np.array([K_aj, G_aj]),
             A_def=A_def,
             for_tol=for_tol,
