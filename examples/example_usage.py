@@ -58,7 +58,7 @@ z_def = var_def[2]
 # NOISE ADDITION
 # ============================================================
 
-var_def_noise = noise.gaussian(var_def=var_def, n_pixels=1, seed=0)
+var_def_noise = noise.gaussian(var_def=var_def, n_pixels=5, seed=0)
 
 r_def_noise = var_def_noise[1]
 z_def_noise = var_def_noise[2]
@@ -135,7 +135,7 @@ plt.plot(-r_def, z_def, "C1")
 # Noisy profile
 
 plt.plot(r_def, z_def, ".k", ms=1, label="Noisy")
-plt.plot(-r_def, z_def, ".k")
+plt.plot(-r_def, z_def, ".k", ms=1)
 
 plt.xlabel(r"$\bar{r}^{*}$")
 plt.ylabel(r"$\bar{z}^{*} - \max(\bar{z}^{*})$")
