@@ -55,12 +55,21 @@ r_def = var_def[1]
 z_def = var_def[2]
 
 # ============================================================
+# NOISE ADDITION
+# ============================================================
+
+var_def_noise = noise.gaussian(var_def=var_def, n_pixels=1, seed=0)
+
+r_def_noise = var_def_noise[1]
+z_def_noise = var_def_noise[2]
+
+# ============================================================
 # ELASTIC INVERSE - STRETCH
 # ============================================================
 
 print('\nElastic inverse - Stretch based')
 
-elastic_inverse_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
+elastic_inverse_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def_noise, verbose=2)
 
 K_stretch = elastic_inverse_stretch["fit"][0]
 
@@ -72,7 +81,7 @@ error_K_stretch = (K_stretch - K) * 100 / K
 
 print('\nElastic inverse - Area based')
 
-elastic_inverse_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
+elastic_inverse_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def_noise, verbose=2)
 
 K_area = elastic_inverse_area["fit"][0]
 
@@ -111,6 +120,7 @@ print(f"Error K (area)        = {error_K_area:.0e} %")
 
 z_ref = z_ref - z_ref.max()
 z_def = z_def - z_def.max()
+z_def_noise = z_def_noise - z_def_noise.max()
 
 plt.figure(figsize=(6, 6))
 
@@ -121,6 +131,11 @@ plt.plot(-r_ref, z_ref, "C0--")
 # Elastic profile
 plt.plot(r_def, z_def, "C1", label="Elastic")
 plt.plot(-r_def, z_def, "C1")
+
+# Noisy profile
+
+plt.plot(r_def, z_def, ".C2", ms=5, label="Noisy")
+plt.plot(-r_def, z_def, ".C2")
 
 plt.xlabel(r"$\bar{r}^{*}$")
 plt.ylabel(r"$\bar{z}^{*} - \max(\bar{z}^{*})$")
