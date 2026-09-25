@@ -134,8 +134,8 @@ plt.plot(-r_def, z_def, "C1")
 
 # Noisy profile
 
-plt.plot(r_def, z_def, ".C2", ms=5, label="Noisy")
-plt.plot(-r_def, z_def, ".C2")
+plt.plot(r_def, z_def, ".k", ms=1, label="Noisy")
+plt.plot(-r_def, z_def, ".k")
 
 plt.xlabel(r"$\bar{r}^{*}$")
 plt.ylabel(r"$\bar{z}^{*} - \max(\bar{z}^{*})$")
