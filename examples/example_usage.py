@@ -13,7 +13,7 @@ V = 20.0
 
 K = 2.0
 G = 2.0
-A_frac = 0.15
+A_def = 0.15
 
 # ============================================================
 # REFERENCE FORWARD
@@ -47,7 +47,7 @@ error_Wo = (Wo_fit - Wo) * 100 / Wo
 
 print('\nElastic forward')
 
-elastic_forward = drop.elastic_forward(Wo=Wo, par_ref=par_ref, var_ref=var_ref, mod_def=(K, G), A_frac=A_frac, verbose=2)
+elastic_forward = drop.elastic_forward(Wo=Wo, par_ref=par_ref, var_ref=var_ref, mod_def=(K, G), A_def=A_def, verbose=2)
 
 var_def = elastic_forward["var_def"]
 
@@ -129,7 +129,7 @@ plt.title(
     rf"$\mathrm{{Wo}} = {Wo:g},\ \bar{{V}} = {V:g}$"
     "\n"
     rf"$\bar{{K}} = {K:g},\ \bar{{G}} = {G:g},\ "
-    rf"A_{{\mathrm{{def}}}} = {A_frac:g}$"
+    rf"A_{{\mathrm{{def}}}} = {A_def:g}$"
 )
 
 plt.legend()
