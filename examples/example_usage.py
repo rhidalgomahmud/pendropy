@@ -69,7 +69,7 @@ z_def = var_def[2]
 
 print('\nElastic inverse - Stretch based')
 
-elastic_inverse_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def_noise, verbose=2)
+elastic_inverse_stretch = drop.elastic_inverse_stretch(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
 
 K_stretch = elastic_inverse_stretch["fit"][0]
 
@@ -81,7 +81,7 @@ error_K_stretch = (K_stretch - K) * 100 / K
 
 print('\nElastic inverse - Area based')
 
-elastic_inverse_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def_noise, verbose=2)
+elastic_inverse_area = drop.elastic_inverse_area(Wo=Wo_fit, V=V, var_def=var_def, verbose=2)
 
 K_area = elastic_inverse_area["fit"][0]
 
